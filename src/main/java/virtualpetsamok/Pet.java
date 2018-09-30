@@ -8,6 +8,7 @@ public class Pet {
 	private int health;
 	private int boredom;
 	private boolean alive;
+	private int damage;
 
 	public Pet(String name, String description) {
 		this.name = name;
@@ -15,6 +16,7 @@ public class Pet {
 		health = 100;
 		happiness = 50;
 		boredom = 0;
+		damage = 0;
 	}
 
 	public Pet(String name, String description, int health, int happiness, int boredom) {
@@ -23,6 +25,7 @@ public class Pet {
 		this.health = health;
 		this.happiness = happiness;
 		this.boredom = boredom;
+		damage = 0;
 		alive = true;
 	}
 
@@ -56,7 +59,6 @@ public class Pet {
 		} else
 			boredom = 100;
 		return boredom;
-
 	}
 
 	public boolean getAlive() {
@@ -90,8 +92,40 @@ public class Pet {
 
 	}
 
-	public void petTick() {
+	public void collectDamage() {
+		boredomDamage();
+		happinessDamage();
+	}
+
+	public void boredomDamage() {
+		if (boredom >= 100) {
+			addDamage();
+		}
+	}
+
+	public void addDamage() {
+		damage += 10;
+	}
+
+	public void happinessDamage() {
+		if (happiness == 0) {
+			addDamage();
+		}
+	}
+
+	public void applyDamage() {
+		health -= damage;
+		damage = 0;
+	}
+
+	public void generalTick() {
 		boredom += 10;
+		collectDamage();
+		applyDamage();
+	}
+
+	public int getDamage() {
+		return damage;
 	}
 
 }

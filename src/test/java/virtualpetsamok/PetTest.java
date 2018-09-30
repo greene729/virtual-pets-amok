@@ -141,7 +141,7 @@ public class PetTest {
 	@Test
 	public void boredomShouldNotGoAbove100() {
 		Pet underTest = new Pet("", "", 1, 1, 100);
-		underTest.petTick();
+		underTest.generalTick();
 		int result = underTest.getBoredom();
 		assertEquals(100, result);
 	}
@@ -152,7 +152,38 @@ public class PetTest {
 		underTest.playWith();
 		int result = underTest.getBoredom();
 		assertEquals(0, result);
+	}
 
+	@Test
+	public void tickShouldIncreaseBoredom() {
+		Pet underTest = new Pet("", "");
+		underTest.generalTick();
+		int result = underTest.getBoredom();
+		assertEquals(10, result);
+	}
+
+	@Test
+	public void lowHappinessShouldDecreaseHealth() {
+		Pet underTest = new Pet("", "", 100, 0, 1);
+		underTest.generalTick();
+		int result = underTest.getHealth();
+		assertEquals(90, result);
+	}
+
+	@Test
+	public void highBoredomShouldDecreaseHealth() {
+		Pet underTest = new Pet("", "", 100, 1, 100);
+		underTest.generalTick();
+		int result = underTest.getHealth();
+		assertEquals(90, result);
+	}
+
+	@Test
+	public void damageShouldResetAfterDamageIsAppliedThroughTick() {
+		Pet underTest = new Pet("", "", 100, 1, 100);
+		underTest.generalTick();
+		int result = underTest.getDamage();
+		assertEquals(0, result);
 	}
 
 }
