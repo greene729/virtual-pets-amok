@@ -59,4 +59,9 @@ public class Dog extends OrganicPet implements Poop {
 			setHealth(getHealth() - 10);
 		}
 	}
+
+	public void cleanCage() {
+		waste = 0;
+
+	}
 }

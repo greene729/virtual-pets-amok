@@ -45,4 +45,25 @@ public class RobotPet extends Pet {
 		}
 	}
 
+	public void robotTick() {
+		oilDamage();
+		rustDamage();
+		rust += 10;
+		oil -= 10;
+	}
+
+	private void rustDamage() {
+		if (rust >= 100) {
+			setHealth(getHealth() - 10);
+		}
+
+	}
+
+	private void oilDamage() {
+		if (oil <= 0) {
+			setHealth(getHealth() - 10);
+		}
+
+	}
+
 }

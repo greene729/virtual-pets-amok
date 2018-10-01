@@ -52,4 +52,8 @@ public class Cat extends OrganicPet implements Poop {
 		}
 	}
 
+	public void emptyLitterBox() {
+		waste = 0;
+	}
+
 }

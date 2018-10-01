@@ -39,4 +39,22 @@ public class RobotTest {
 	// additional tests involving maintenance have been assumed to work based on
 	// similar tests with different variables from other classes
 
+	@Test
+	public void highRustShouldReduceHealth() {
+		RobotPet underTest = new RobotPet("", "", 100, 1);
+		underTest.robotTick();
+		int result = underTest.getHealth();
+		assertEquals(90, result);
+
+	}
+
+	@Test
+	public void lowOilShouldReduceHealth() {
+		RobotPet underTest = new RobotPet("", "", 1, 0);
+		underTest.robotTick();
+		int result = underTest.getHealth();
+		assertEquals(90, result);
+
+	}
+
 }
