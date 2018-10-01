@@ -3,6 +3,7 @@ package virtualpetsamok;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class PetShelter {
 
@@ -27,7 +28,7 @@ public class PetShelter {
 
 	}
 
-	public void feedAllPets(int feedType) {
+	public void feedAllOrganicPets(int feedType) {
 		for (Pet pet : petsInShelter()) {
 			if (pet instanceof OrganicPet) {
 				((OrganicPet) pet).feed(feedType);
@@ -35,7 +36,7 @@ public class PetShelter {
 		}
 	}
 
-	public void waterAllPets(int waterType) {
+	public void waterAllOrganicPets(int waterType) {
 		for (Pet pet : petsInShelter()) {
 			if (pet instanceof OrganicPet) {
 				((OrganicPet) pet).water(waterType);
@@ -49,6 +50,32 @@ public class PetShelter {
 				((Dog) pet).walk();
 			}
 		}
+	}
+
+	public void playWithPet(String petToPlay, int playType) {
+		Pet pet = shelter.get(petToPlay);
+		pet.playWith(playType);
+	}
+
+	public void maintenanceAllRobots(int maintenanceType) {
+		for (Pet pet : petsInShelter()) {
+			if (pet instanceof RobotPet) {
+				((RobotPet) pet).maintenance(maintenanceType);
+			}
+		}
+	}
+
+	public void cleanTheLitterBox() {
+		for (Pet pet : petsInShelter()) {
+			if (pet instanceof Cat) {
+				((Cat) pet).emptyLitterBox();
+			}
+		}
+	}
+
+	public void cleanACage(String cageToClean) {
+		Dog dog = (Dog) shelter.get(cageToClean);
+		dog.cleanCage();
 	}
 
 	public void allTheTicks() {
@@ -79,6 +106,50 @@ public class PetShelter {
 			((Cat) pet).generalTick();
 			((Cat) pet).organicPetTick();
 			((Cat) pet).catTick();
+		}
+	}
+
+	public void displayPets() {
+		for (Pet pet : petsInShelter()) {
+			displayCat(pet);
+			displayDog(pet);
+			displayRobot(pet);
+		}
+
+	}
+
+	private void displayCat(Pet pet) {
+		if (pet instanceof Cat) {
+			System.out.println("|" + pet.getName() + "|" + pet.getDescription() + "| Hunger: " + ((Cat) pet).getHunger()
+					+ "| Thirst: " + ((Cat) pet).getThirst() + "| Boredom: " + pet.getBoredom() + "| Happiness: "
+					+ pet.getHappiness() + "| Health: " + pet.getHealth() + "|");
+		}
+	}
+
+	private void displayDog(Pet pet) {
+		if (pet instanceof Dog) {
+			System.out.println("|" + pet.getName() + "|" + pet.getDescription() + "| Hunger: " + ((Dog) pet).getHunger()
+					+ "| Thirst: " + ((Dog) pet).getThirst() + "| Boredom: " + pet.getBoredom() + "| Happiness: "
+					+ pet.getHappiness() + "| Waste: " + ((Dog) pet).getWaste() + "| Health: " + pet.getHealth() + "|");
+		}
+	}
+
+	public void displayDogs() {
+		for (Pet pet : petsInShelter()) {
+			if (pet instanceof Dog) {
+				System.out.println("|" + pet.getName() + "|" + pet.getDescription() + "| Hunger: "
+						+ ((Dog) pet).getHunger() + "| Thirst: " + ((Dog) pet).getThirst() + "| Boredom: "
+						+ pet.getBoredom() + "| Happiness: " + pet.getHappiness() + "| Waste: " + ((Dog) pet).getWaste()
+						+ "| Health: " + pet.getHealth() + "|");
+			}
+		}
+	}
+
+	private void displayRobot(Pet pet) {
+		if (pet instanceof RobotPet) {
+			System.out.println("|" + pet.getName() + "|" + pet.getDescription() + "| Rust: "
+					+ ((RobotPet) pet).getRust() + "| Oil Level: " + ((RobotPet) pet).getOil() + "| Boredom: "
+					+ pet.getBoredom() + "| Happiness: " + pet.getHappiness() + "| Health: " + pet.getHealth() + "|");
 		}
 	}
 
