@@ -44,10 +44,10 @@ public class PetShelter {
 		}
 	}
 
-	public void walkAllDogs() {
+	public void walkAllWalkable() {
 		for (Pet pet : petsInShelter()) {
-			if (pet instanceof Dog) {
-				((Dog) pet).walk();
+			if (pet instanceof Walkable) {
+				((Walkable) pet).walk();
 			}
 		}
 	}
@@ -109,6 +109,8 @@ public class PetShelter {
 		}
 	}
 
+	// the following 4 methods are in lieu of doing an @Override toString() for each
+	// class
 	public void displayPets() {
 		for (Pet pet : petsInShelter()) {
 			displayCat(pet);
@@ -134,6 +136,16 @@ public class PetShelter {
 		}
 	}
 
+	private void displayRobot(Pet pet) {
+		if (pet instanceof RobotPet) {
+			System.out.println("|" + pet.getName() + "|" + pet.getDescription() + "| Rust: "
+					+ ((RobotPet) pet).getRust() + "| Oil Level: " + ((RobotPet) pet).getOil() + "| Boredom: "
+					+ pet.getBoredom() + "| Happiness: " + pet.getHappiness() + "| Health: " + pet.getHealth() + "|");
+		}
+	}
+
+// had to make a display of just dogs for the cleanACage() method in the App class
+// don't need this for other types of pets so haven't made one	
 	public void displayDogs() {
 		for (Pet pet : petsInShelter()) {
 			if (pet instanceof Dog) {
@@ -144,13 +156,4 @@ public class PetShelter {
 			}
 		}
 	}
-
-	private void displayRobot(Pet pet) {
-		if (pet instanceof RobotPet) {
-			System.out.println("|" + pet.getName() + "|" + pet.getDescription() + "| Rust: "
-					+ ((RobotPet) pet).getRust() + "| Oil Level: " + ((RobotPet) pet).getOil() + "| Boredom: "
-					+ pet.getBoredom() + "| Happiness: " + pet.getHappiness() + "| Health: " + pet.getHealth() + "|");
-		}
-	}
-
 }

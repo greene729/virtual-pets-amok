@@ -1,6 +1,6 @@
 package virtualpetsamok;
 
-public class Dog extends OrganicPet implements Poop {
+public class Dog extends OrganicPet implements Poop, Walkable {
 
 	private int waste;
 	private int ticksSincePoop;
@@ -46,6 +46,10 @@ public class Dog extends OrganicPet implements Poop {
 		return ticksSincePoop;
 	}
 
+	/* (non-Javadoc)
+	 * @see virtualpetsamok.Walkable#walk()
+	 */
+	@Override
 	public void walk() {
 
 		ticksSincePoop = 0;

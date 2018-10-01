@@ -1,6 +1,6 @@
 package virtualpetsamok;
 
-public class RobotPet extends Pet {
+public class RobotPet extends Pet implements Walkable {
 
 	private int rust;
 	private int oil;
@@ -43,6 +43,10 @@ public class RobotPet extends Pet {
 			rust -= 45;
 			oil -= 30;
 		}
+	}
+
+	public void walk() {
+		setBoredom(getBoredom() - 30);
 	}
 
 	public void robotTick() {

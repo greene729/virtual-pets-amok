@@ -121,6 +121,7 @@ public class Pet {
 
 	public void generalTick() {
 		boredom += 10;
+		happiness -= 5;
 		collectDamage();
 		applyDamage();
 	}

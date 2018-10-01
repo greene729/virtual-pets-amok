@@ -1,7 +1,5 @@
 package virtualpetsamok;
 
-import static org.hamcrest.Matchers.stringContainsInOrder;
-
 import java.util.Scanner;
 
 public class VirtualPetApp {
@@ -61,6 +59,7 @@ public class VirtualPetApp {
 				input.nextLine();
 				shelter.waterAllOrganicPets(waterType);
 				shelter.allTheTicks();
+				break;
 			case "3":
 				System.out.println("Pick a maintenance level:");
 				System.out.println("1 - Just a once-over");
@@ -70,11 +69,14 @@ public class VirtualPetApp {
 				input.nextLine();
 				shelter.maintenanceAllRobots(maintenanceType);
 				shelter.allTheTicks();
+				break;
 			case "4":
 				System.out.println("You walk the dogs. They did all their businesses.");
+				System.out.println("For some reason the robots came too. They look less bored I guess.");
 				System.out.println();
-				shelter.walkAllDogs();
+				shelter.walkAllWalkable();
 				shelter.allTheTicks();
+				break;
 			case "5":
 				System.out.println("Pick a pet to play with:");
 				shelter.displayPets();
@@ -87,29 +89,72 @@ public class VirtualPetApp {
 				input.nextLine();
 				shelter.playWithPet(petToPlay, playType);
 				shelter.allTheTicks();
+				break;
 			case "6":
 				System.out.println("You clean the communal litterbox.");
 				System.out.println("The cats look at you with gratitude.");
 				System.out.println("Or disdain. It's really hard to tell.");
 				shelter.cleanTheLitterBox();
 				shelter.allTheTicks();
+				break;
 			case "7":
 				System.out.println("Choose a which dog's cage to clean:");
 				shelter.displayDogs();
 				String dogToClean = input.nextLine();
 				shelter.cleanACage(dogToClean);
+				shelter.allTheTicks();
+				break;
 			case "8":
+				System.out.println("What is the name of the pet you would like to deposit?");
+				String newPetName = input.nextLine();
+				System.out.println("Wonderful! " + newPetName + " is a lovely name!");
+				System.out.println("Please tell us what " + newPetName + " looks like.");
+				String newPetDescription = input.nextLine();
+				System.out.println("Beautiful!");
+				System.out.println("What kind of pet is " + newPetName + "?");
+				System.out.println("1 - Cat");
+				System.out.println("2 - Dog");
+				System.out.println("3 - Robot");
+				int petType = input.nextInt();
+				input.nextLine();
+				chooseNewPetType(shelter, newPetName, newPetDescription, petType);
+				System.out.println("Welcome " + newPetName + "!");
+				shelter.allTheTicks();
+				break;
 			case "9":
+				System.out.println("Which lucky pet has found their forever home?");
+				shelter.displayPets();
+				String petToAdopt = input.nextLine();
+				System.out.println("Good bye " + petToAdopt + "!");
+				shelter.removePet(petToAdopt);
+				break;
 			case "10":
 				playerContinues = false;
+				break;
+			default:
+				System.out.println("I'm not sure what you're getting at. Maybe try that again?");
 
 			}
-
 		} while (playerContinues);
 
 		System.out.println("Thank you again for volunteering at the Virtual Pet Center!");
 		System.out.println("Hope to see you again soon!");
 		System.exit(0);
+		input.close();
+
+	}
+
+	private static void chooseNewPetType(PetShelter shelter, String newPetName, String newPetDescription, int petType) {
+		if (petType == 1) {
+			Pet newCat = new Cat(newPetName, newPetDescription);
+			shelter.addNewPet(newCat);
+		} else if (petType == 2) {
+			Pet newDog = new Dog(newPetName, newPetDescription);
+			shelter.addNewPet(newDog);
+		} else if (petType == 3) {
+			Pet newRobot = new RobotPet(newPetName, newPetDescription);
+			shelter.addNewPet(newRobot);
+		}
 
 	}
 
