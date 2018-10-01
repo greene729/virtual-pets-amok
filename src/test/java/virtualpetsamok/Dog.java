@@ -1,18 +1,19 @@
 package virtualpetsamok;
 
-public class Cat extends OrganicPet implements Poop {
+public class Dog extends OrganicPet implements Poop {
 
-	private static int waste;
+	private int waste;
 	private int ticksSincePoop;
 
-	public Cat(String name, String description) {
+	public Dog(String name, String description) {
 		super(name, description);
 		this.waste = 0;
 		this.ticksSincePoop = 0;
+
 	}
 
-// This overloaded constructor is for testing purposes
-	public Cat(String name, String description, int ticksSincePoop, int waste) {
+	// This overloaded constructor is for testing purposes
+	public Dog(String name, String description, int ticksSincePoop, int waste) {
 		super(name, description);
 		this.ticksSincePoop = ticksSincePoop;
 		this.waste = waste;
@@ -27,7 +28,7 @@ public class Cat extends OrganicPet implements Poop {
 		ticksSincePoop = 0;
 	}
 
-	public void catTick() {
+	public void dogTick() {
 		checkPoopTimer();
 		excessiveWasteDamage();
 
@@ -45,11 +46,17 @@ public class Cat extends OrganicPet implements Poop {
 		return ticksSincePoop;
 	}
 
+	public void walk() {
+
+		ticksSincePoop = 0;
+		setBoredom(getBoredom() - 30);
+
+	}
+
 	public void excessiveWasteDamage() {
 		if (waste >= 10) {
 
 			setHealth(getHealth() - 10);
 		}
 	}
-
 }

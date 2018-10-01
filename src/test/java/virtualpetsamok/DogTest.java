@@ -4,64 +4,63 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class CatTest {
+public class DogTest {
 
 	@Test
 	public void shouldGetWaste() {
-		Cat underTest = new Cat("", "");
+		Dog underTest = new Dog("", "");
 		int result = underTest.getWaste();
 		assertEquals(0, result);
 	}
 
 	@Test
 	public void shouldPoop() {
-		Cat underTest = new Cat("", "");
+		Dog underTest = new Dog("", "");
 		underTest.poop();
 		int result = underTest.getWaste();
 		assertEquals(1, result);
 	}
 
 	@Test
-	public void shouldPoopCollectively() {
-		Cat underTest = new Cat("", "");
-		Cat underTestToo = new Cat("a", "");
-		underTest.poop();
-		int result = underTestToo.getWaste();
-		assertEquals(1, result);
-	}
-
-	@Test
 	public void shouldCountTurnsSincePoop() {
-		Cat underTest = new Cat("", "");
-		underTest.catTick();
+		Dog underTest = new Dog("", "");
+		underTest.dogTick();
 		int result = underTest.getTicksSincePoop();
 		assertEquals(1, result);
 	}
 
 	@Test
 	public void shouldPoopEveryFiveTurns() {
-		Cat underTest = new Cat("", "");
-		underTest.catTick();
-		underTest.catTick();
-		underTest.catTick();
-		underTest.catTick();
-		underTest.catTick();
+		Dog underTest = new Dog("", "");
+		underTest.dogTick();
+		underTest.dogTick();
+		underTest.dogTick();
+		underTest.dogTick();
+		underTest.dogTick();
 		int result = underTest.getWaste();
 		assertEquals(1, result);
 	}
 
 	@Test
 	public void shouldResetPoopTimerAfterPoop() {
-		Cat underTest = new Cat("", "", 4, 1);
-		underTest.catTick();
+		Dog underTest = new Dog("", "", 4, 1);
+		underTest.dogTick();
+		int result = underTest.getTicksSincePoop();
+		assertEquals(0, result);
+	}
+
+	@Test
+	public void shouldResetPoopTimerAfterWalk() {
+		Dog underTest = new Dog("", "", 4, 1);
+		underTest.walk();
 		int result = underTest.getTicksSincePoop();
 		assertEquals(0, result);
 	}
 
 	@Test
 	public void excessiveDamageShouldReduceHealthByTen() {
-		Cat underTest = new Cat("", "", 4, 10);
-		underTest.catTick();
+		Dog underTest = new Dog("", "", 4, 10);
+		underTest.dogTick();
 		int result = underTest.getHealth();
 		assertEquals(90, result);
 	}

@@ -19,6 +19,7 @@ public class Pet {
 		damage = 0;
 	}
 
+	// This overloaded constructor is for testing purposes
 	public Pet(String name, String description, int health, int happiness, int boredom) {
 		this.name = name;
 		this.description = description;
@@ -126,6 +127,14 @@ public class Pet {
 
 	public int getDamage() {
 		return damage;
+	}
+
+	public void setBoredom(int boredom) {
+		this.boredom = boredom;
+	}
+
+	public void setHealth(int health) {
+		this.health = health;
 	}
 
 }
